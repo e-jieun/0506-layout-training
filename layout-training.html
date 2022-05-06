@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root">
+    <section id="con-1">
+      <!-- !뒷배경의 글씨까지 한 컨테이너에 형제 관계로 묶어서 컨테이너에 넣어주면 제어하기 편할 것 -->
+    <div id="pop-up">
+      <!-- popup: 반드시 접속을 해야하는 부분, 팝업창 -->
+      <!-- text -->
+      <div>
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+        </ul>
+        <h1>LOREM IPSUM</h1>
+        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, sapiente deserunt dolore iusto modi atque perferendis molestias laudantium aliquid? Sed voluptatum impedit distinctio cum alias maxime suscipit omnis dicta fugit!</div>
+        <button>close</button>
+      </div>
+      <!-- bg -->
+      <div></div>
+    </div>
+    <div id="shadow">
+    </div>
+  </section>
+    <section id="con-2">
+      <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quia sequi similique voluptates aut, accusamus laborum sapiente, architecto perferendis vitae voluptatum porro tempora non fuga. Architecto, sunt? Commodi, quae debitis?
+      Et quisquam inventore aliquid ex voluptatibus dolorem, repellat libero aspernatur animi dignissimos rerum saepe soluta tempore vitae corrupti dolorum in quasi ut cumque dolores consectetur eos facilis necessitatibus est? Ut!</div>
+      </section>
+  </div>
+  <script>
+    // *
+    document.body.setAttribute('style','margin: 0; padding: 0;');
+
+    // get #root
+    const root = document.getElementById('root');
+    // console.log(root);
+    // root style
+    root.setAttribute('style','width: 100vw; height: 100vh;');
+
+    // get #con-1
+    const con1 = document.getElementById('con-1');
+    // con1 style
+    con1.style.position = 'absolute';
+    con1.style.top = '50vw';
+    con1.style.left = '30vw';
+    // console.log(con1);
+    // console.log(con1.children);
+
+    // get #con-2
+    const con2 = document.getElementById('con-2');
+    console.log(con2);
+    con2.style.width = '100vw';
+    con2.style.height = '100vh';
+    // con2.style.position = 'absolute';
+    con2.style.display = 'flex';
+    con2.style.alignItems = 'center';
+    con2.style.justifyContent = 'center';
+
+    // console.log(con2.children);
+    const con2Div = con2.children[0];
+    console.log(con2Div);
+    con2Div.setAttribute('style','width: 30vh; height: 30vh; position: relative; left: 20vh; top: 10vh;');
+    
+    
+    // #pop-up 식별
+    const popUp = con1.children[0];
+    // console.log(popUp);
+    // popUp style
+    popUp.style.display = 'flex';
+    popUp.style.flexDirection = 'column';
+    popUp.style.justifyContent = 'space-around';
+    popUp.style.alignItems = 'center';
+    popUp.style.padding = '1vh';
+    popUp.style.position = 'absolute';
+    popUp.style.zIndex = 2;
+    
+    // popUp.children
+    console.log(popUp.children);
+    const textCon = popUp.children[0];
+    console.log(textCon);
+    console.log(textCon.children);
+    const bgCon = popUp.children[1];
+    console.dir(bgCon);
+    // textCon style
+    textCon.style.width = '80%';
+    // #pop-up>div:nth-child(2)
+    bgCon.style.backgroundColor = 'rgba(255,255,255,1.0)';
+  
+    // bgCon.style.opacity = 1;
+    console.log(bgCon);
+    // ul
+    const ul = textCon.children[0];
+    console.log(ul.style);
+    ul.style.listStyleType = 'none';
+    ul.style.display = 'flex';
+    ul.style.flexDirection = 'column';
+    ul.style.rowGap = '1vh';
+    console.log(ul.children);
+    // li
+    const li = ul.children;
+    console.log(li);
+    // li에 동시에 적용해줄 solid
+    for(let i = 0; i < li.length; i++){
+      li[i].style.width = '20px';
+      li[i].style.height = '1px';
+      li[i].style.backgroundColor = '#000';
+      li[i].textContent = '';
+    }
+
+    // #shadow 식별
+    const shadow = con1.children[1];
+    console.log(shadow.style);
+    // shadow style
+    shadow.style.backgroundColor = '#414141';
+    shadow.style.position = 'relative';
+    shadow.style.top = '5vh';
+    shadow.style.left = '5vh';
+    shadow.style.filter = 'blur(10px)';
+    // bgcon style
+    // bgCon.style.opacity = 0.5;
+    // bgCon.style.width = '300px';
+    // bgCon.style.width = '400px';
+    
+    // popUp과 shadow에 동시 적용할 크기
+    for(let i = 0; i < con1.children.length; i++){
+      con1.children[i].style.border = '1px solid #000';
+      con1.children[i].style.width = '300px';
+      con1.children[i].style.height = '400px';
+      con1.children[i].style.borderRadius = '30px';
+      // !con1.children[0]>div+div를 줘서 div:nth-child(2)를 배경으로 따로 줬었는데
+      // !backgroundColor를 rgba값을 줘서 투명도를 주면 쉽게 문제가 해결이 된다
+      con1.children[0].style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+    }
+    // close button
+    const btn = document.querySelector('button');
+    console.log(btn);
+
+    // btn style
+    btn.style.position = 'relative';
+    btn.style.top = '2vh';
+    btn.style.left = '20vh';
+
+    // btn에 display: none;되는 클릭 이벤트 달아주기
+    btn.addEventListener('click', function(){
+      popUp.style.display = 'none';
+      // !그림자도 없애주기
+      shadow.style.display = 'none';
+
+    });
+
+    const h1 = document.querySelector('h1');
+    console.log(h1);
+    h1.style.fontSize = '2rem';
+
+
+  </script>
+</body>
+</html>
